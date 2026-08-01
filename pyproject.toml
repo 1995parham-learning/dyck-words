@@ -1,0 +1,57 @@
+[project]
+name = "dyck"
+version = "0.1.0"
+description = "Dyck words and the Catalan numbers that count them"
+readme = "README.md"
+requires-python = ">=3.14"
+license = "MIT"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/1995parham-learning/dyck-words"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dyck"]
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.140",
+    "mypy>=1.18",
+    "pytest>=8.4",
+    "ruff>=0.14",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src"]
+addopts = "--doctest-modules"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",   # incompatible with D211
+    "D213",   # incompatible with D212
+    "COM812", # conflicts with the formatter
+    "CPY001", # the LICENSE file covers this
+    "TC003",  # runtime imports read better than a TYPE_CHECKING block
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "INP001",  # tests are intentionally not a package
+    "S101",    # assert is the point
+    "PLR2004", # magic values are the expected results
+    "D103",    # the test name is the docstring
+]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+files = ["src", "tests"]
