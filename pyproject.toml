@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "Dyck words and the Catalan numbers that count them"
 readme = "README.md"
 requires-python = ">=3.14"
-license = "MIT"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 dependencies = []
 
 [project.urls]
@@ -39,8 +40,7 @@ ignore = [
     "D203",   # incompatible with D211
     "D213",   # incompatible with D212
     "COM812", # conflicts with the formatter
-    "CPY001", # the LICENSE file covers this
-    "TC003",  # runtime imports read better than a TYPE_CHECKING block
+    "TC003", # runtime imports read better than a TYPE_CHECKING block
 ]
 
 [tool.ruff.lint.per-file-ignores]

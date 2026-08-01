@@ -106,7 +106,10 @@ route to the same count.
 
 ## License
 
-MIT
+GNU General Public License v3.0 or later — see [LICENSE](LICENSE).
+
+This is a copyleft licence: anything you distribute that builds on this code has
+to be released under the GPL as well.
 
 [oeis]: https://oeis.org/A000108
 [hyp]: https://hypothesis.readthedocs.io/
