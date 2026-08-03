@@ -26,11 +26,12 @@ False
 | `is_valid_with_wildcards` | `*` may be `(`, `)`, or empty | O(n) | O(1) |
 | `generate` | every Dyck word of `n` pairs | O(output) | O(n) |
 
-Two details worth pulling out, since they are where the obvious implementation goes wrong:
-
-**A final depth of zero is not sufficient.** `")("` ends balanced and is not, so the counter has to be checked for dipping below zero *during* the scan, not only at the end. This is the single most common way to get the problem wrong.
-
-**One counter answers "is it balanced", two answer "how unbalanced".** Validity is a yes/no question that a single depth counter settles. Counting the repairs needed is not: `min_insertions_to_balance` must track unmatched openers and unmatched closers separately, or `"())("` — which needs two insertions — cancels itself out to zero.
+> [!warning]
+> Two details worth pulling out, since they are where the obvious implementation goes wrong:
+> 
+> **A final depth of zero is not sufficient.** `")("` ends balanced and is not, so the counter has to be checked for dipping below zero *during* the scan, not only at the end. This is the single most common way to get the problem wrong.
+>
+> **One counter answers "is it balanced", two answer "how unbalanced".** Validity is a yes/no question that a single depth counter settles. Counting the repairs needed is not: `min_insertions_to_balance` must track unmatched openers and unmatched closers separately, or `"())("` — which needs two insertions — cancels itself out to zero.
 
 > [!note]
 > A stack appears only in `is_balanced_multi`, and it earns its place there rather than being the reflexive choice. With one bracket type a counter is strictly better; with several, closing a bracket means knowing which one is innermost, and `"([)]"` is the string that a counter cannot reject.
