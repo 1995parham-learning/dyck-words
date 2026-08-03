@@ -1,13 +1,7 @@
-# dyck-words
+<h1 align="center">dyck-words</h1>
+<h6 align="center">Balanced brackets and the Catalan numbers that count them, in Python 3.14.</h6>
 
-Balanced brackets and the Catalan numbers that count them, in Python 3.14.
-
-A *Dyck word* is a string of brackets where every closer matches an earlier
-opener and nothing is left open at the end — `(()())` is one, `())(` is not.
-Two things live here: the algorithms that answer questions about such strings,
-and the arithmetic that counts them. They meet in `tests/test_cross.py`, where
-enumerating every Dyck word of a given length has to produce exactly the number
-the closed form predicts.
+A *Dyck word* is a string of brackets where every closer matches an earlier opener and nothing is left open at the end — `(()())` is one, `())(` is not. Two things live here: the algorithms that answer questions about such strings, and the arithmetic that counts them. They meet in `tests/test_cross.py`, where enumerating every Dyck word of a given length has to produce exactly the number the closed form predicts.
 
 ```python
 >>> from dyck import is_balanced, generate, catalan_via_binomial
@@ -32,23 +26,14 @@ False
 | `is_valid_with_wildcards` | `*` may be `(`, `)`, or empty | O(n) | O(1) |
 | `generate` | every Dyck word of `n` pairs | O(output) | O(n) |
 
-Two details worth pulling out, since they are where the obvious implementation
-goes wrong:
+Two details worth pulling out, since they are where the obvious implementation goes wrong:
 
-**A final depth of zero is not sufficient.** `")("` ends balanced and is not,
-so the counter has to be checked for dipping below zero *during* the scan, not
-only at the end. This is the single most common way to get the problem wrong.
+**A final depth of zero is not sufficient.** `")("` ends balanced and is not, so the counter has to be checked for dipping below zero *during* the scan, not only at the end. This is the single most common way to get the problem wrong.
 
-**One counter answers "is it balanced", two answer "how unbalanced".** Validity
-is a yes/no question that a single depth counter settles. Counting the repairs
-needed is not: `min_insertions_to_balance` must track unmatched openers and
-unmatched closers separately, or `"())("` — which needs two insertions —
-cancels itself out to zero.
+**One counter answers "is it balanced", two answer "how unbalanced".** Validity is a yes/no question that a single depth counter settles. Counting the repairs needed is not: `min_insertions_to_balance` must track unmatched openers and unmatched closers separately, or `"())("` — which needs two insertions — cancels itself out to zero.
 
-A stack appears only in `is_balanced_multi`, and it earns its place there rather
-than being the reflexive choice. With one bracket type a counter is strictly
-better; with several, closing a bracket means knowing which one is innermost,
-and `"([)]"` is the string that a counter cannot reject.
+> [!note]
+> A stack appears only in `is_balanced_multi`, and it earns its place there rather than being the reflexive choice. With one bracket type a counter is strictly better; with several, closing a bracket means knowing which one is innermost, and `"([)]"` is the string that a counter cannot reject.
 
 ## Catalan numbers
 
